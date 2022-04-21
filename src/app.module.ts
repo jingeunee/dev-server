@@ -1,8 +1,14 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+// import { join } from 'path';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+
 import configuration from './config/configuration';
+import { Todo } from './todos/todo.entity';
+import { TodosModule } from './todos/todos.module';
+import { User } from './user/user.entity';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -11,8 +17,25 @@ import configuration from './config/configuration';
       isGlobal: true,
       load: [configuration],
     }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'oracle',
+        username: configService.get('database.user'),
+        password: configService.get('database.password'),
+        connectString: configService.get('database.connectString'),
+        // entities: [join(__dirname, '/**/*.entity.js')],
+        entities: [User, Todo],
+        synchronize: true,
+        logging: true,
+        namingStrategy: new SnakeNamingStrategy(),
+      }),
+    }),
+    UserModule,
+    TodosModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
