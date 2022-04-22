@@ -22,6 +22,6 @@ COPY .env /app/.env
 
 RUN npm install --silent
 
-EXPOSE 3000
+EXPOSE 8080
 
 CMD ["node", "dist/main.js"]
