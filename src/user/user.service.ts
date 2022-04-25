@@ -18,6 +18,14 @@ export class UserService {
     return this.usersRepository.findOne(id);
   }
 
+  findSnsId(snsId: string, provider: string): Promise<User> {
+    return this.usersRepository.findOne({ where: { snsId, provider } });
+  }
+
+  async create(params): Promise<void> {
+    await this.usersRepository.save(params);
+  }
+
   async remove(id: string): Promise<void> {
     await this.usersRepository.delete(id);
   }

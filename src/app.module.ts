@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 import configuration from './config/configuration';
+import { OauthModule } from './oauth/oauth.module';
 import { Todo } from './todos/todo.entity';
 import { TodosModule } from './todos/todos.module';
 import { User } from './user/user.entity';
@@ -34,6 +35,7 @@ import { UserModule } from './user/user.module';
     }),
     UserModule,
     TodosModule,
+    OauthModule,
   ],
   controllers: [],
   providers: [],

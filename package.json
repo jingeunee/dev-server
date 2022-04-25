@@ -27,6 +27,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/typeorm": "^8.0.3",
     "@types/oracledb": "^5.2.3",
+    "axios": "^0.26.1",
     "node-oracledb": "^1.0.2",
     "oracledb": "^5.3.0",
     "reflect-metadata": "^0.1.13",
