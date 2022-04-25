@@ -12,10 +12,11 @@ export class OauthController {
   @Post('/kakao')
   async getKakao(@Body() data: { code: string }): Promise<void> {
     const token = await this.oauthService.getKakaoToken(data.code);
-    const profile = await this.oauthService.getKakaoProfile(token.access_token);
+    const profile = await this.oauthService.getKakaoProfile(
+      token?.access_token,
+    );
 
     const findSnsUser = await this.userService.findSnsId(profile.id, 'kakao');
-    console.log(profile, findSnsUser);
     if (!findSnsUser) {
       await this.userService.create({
         name: profile.kakao_account.profile.nickname,
