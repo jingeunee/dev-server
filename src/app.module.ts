@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 // import { join } from 'path';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 import configuration from './config/configuration';
+import { AuthMiddleware } from './middleware/auth';
 import { OauthModule } from './oauth/oauth.module';
 import { Todo } from './todos/todo.entity';
 import { TodosModule } from './todos/todos.module';
@@ -40,4 +41,8 @@ import { UserModule } from './user/user.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AuthMiddleware).forRoutes('user', 'todos');
+  }
+}
