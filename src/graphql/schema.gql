@@ -1,0 +1,44 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Blog {
+  body: String!
+  createdAt: DateTime!
+  id: Float!
+  thumbnail: String!
+  title: String!
+  updatedAt: DateTime!
+  user: User
+  userId: Float
+}
+
+input CreateBlogInput {
+  body: String!
+  thumbnail: String!
+  title: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Mutation {
+  create(createBlogData: CreateBlogInput!): Blog!
+  delete(id: String!): Boolean!
+}
+
+type Query {
+  getList: [Blog!]!
+}
+
+type User {
+  createdAt: DateTime!
+  email: String
+  id: Float!
+  image: String
+  lastLoginDate: DateTime!
+  name: String!
+  updatedAt: DateTime!
+}

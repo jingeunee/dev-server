@@ -7,3 +7,9 @@ async function bootstrap() {
   await app.listen(8080);
 }
 bootstrap();
+
+process.on('SIGHUP', () => console.log('Received: SIGHUP'));
+process.on('SIGINT', () => {
+  console.log('Received: SIGINT');
+  process.exit(1);
+});

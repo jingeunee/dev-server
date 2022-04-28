@@ -1,3 +1,4 @@
+import { Field, ObjectType } from '@nestjs/graphql';
 import {
   Column,
   CreateDateColumn,
@@ -6,14 +7,18 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+@ObjectType()
 @Entity()
 export class User {
+  @Field()
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Field()
   @Column({ type: 'varchar2', default: '' })
   name: string;
 
+  @Field({ defaultValue: '', nullable: true })
   @Column({ type: 'varchar2', nullable: true })
   email: string;
 
@@ -23,15 +28,19 @@ export class User {
   @Column({ type: 'varchar2', nullable: true })
   snsId: string;
 
+  @Field({ defaultValue: '', nullable: true })
   @Column({ type: 'varchar2', nullable: true })
   image: string;
 
+  @Field()
   @Column({ type: 'timestamp', nullable: true })
   lastLoginDate: Date | null;
 
+  @Field()
   @CreateDateColumn()
   createdAt: Date;
 
+  @Field()
   @UpdateDateColumn()
   updatedAt: Date;
 }

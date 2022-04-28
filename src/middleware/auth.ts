@@ -20,7 +20,7 @@ export async function AuthMiddleware(
         },
       })
       .then((res) => res.data);
-    req.user = kakaoToken;
+    (req as unknown as { user: any }).user = kakaoToken;
     next();
   } catch (error) {
     throw new BadRequestException(error);
