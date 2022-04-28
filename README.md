@@ -10,6 +10,7 @@ Frontend project Repo : [dev-log](https://github.com/jingeunee/dev-log)
 
 - Node.js
 - Nestjs
+- Graphql
 - Typescript
 - TypeORM
 - Axios
